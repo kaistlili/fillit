@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 15:25:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/01/18 09:43:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/01/18 10:04:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	ft_sort(unsigned char *tetrimino)
 	}
 	while (j == 1)
 	{
-		if (((tetrimino[0] & 128) == 0) && ((tetrimino[1] & 128) == 0 ))
+		if (((tetrimino[0] & 128) == 0) && ((tetrimino[1] & 128) == 0 )
+				&& ((tetrimino[2] & 128) == 0))
 			ft_shift(tetrimino);
 		else
 			j = 0;
