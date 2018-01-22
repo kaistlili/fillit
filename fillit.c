@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 15:25:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/01/22 14:30:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/01/22 14:54:41 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_tobitflag(char *buffer, unsigned char *flag);
+int ft_solver(unsigned char *tetri, int size);
 
 void	ft_swap(unsigned char *a, unsigned char *b)
 {
@@ -130,5 +130,6 @@ int main(int argc, char **argv)
 		ft_putstr("\n");
 		i = i + 4;
 	}
+	ft_solver(tetri, size);
 	
 }
