@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 15:25:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/01/25 15:34:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/01/31 15:49:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	ft_readfile(int ac, char **av, unsigned char *tetri)
 	while (read(fd, &buffer, 20) == 20)
 	{
 		ft_tobitflag(buffer, &tetri[i]);
-
 		i = i + 4;
 	}
 

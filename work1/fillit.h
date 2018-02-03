@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:57:55 by ktlili            #+#    #+#             */
-/*   Updated: 2018/01/25 14:46:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/01/29 20:14:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define FILLIT_H
 
 #include "libft.h"
+
+void	ft_shiftleft(unsigned int *bitmap);
+void	ft_shiftright(unsigned int *bitmap);
+void	ft_shiftup(unsigned int *bitmap);
+void	ft_shiftdown(unsigned int *bitmap);
+void	ft_sortbitmap(unsigned int *bitmap);
 
 void	ft_showbitmap(unsigned int *bitmap);
 void	ft_showint(unsigned int x);

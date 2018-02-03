@@ -6,13 +6,87 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 13:59:40 by ktlili            #+#    #+#             */
-/*   Updated: 2018/01/25 14:45:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/01/29 20:14:08 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 
+void	ft_shiftleft(unsigned int *bitmap)
+{
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		bitmap[i] = bitmap[i] << 1;
+		i++;
+	}
+}
+
+
+void	ft_shiftright(unsigned int *bitmap)
+{
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		bitmap[i] = bitmap[i] >> 1;
+		i++;
+	}
+}
+
+void	ft_shiftup(unsigned int *bitmap)
+{
+	int i;
+
+	i = 0;
+	while (i < 15)
+	{
+		bitmap[i] = bitmap[i + 1];
+		i++;
+	}
+	bitmap[i] = 0;
+}
+
+void	ft_shiftdown(unsigned int *bitmap)
+{
+	int i;
+
+	i = 15;
+	while (i > 0)
+	{
+		bitmap[i] = bitmap[i - 1];
+		i--;
+	}
+	bitmap[i] = 0;
+}
+#include <stdio.h>
+int	ft_mask(unsigned int *bitmap)
+{
+	int i;
+
+	i = 0;
+	while ((i < 16) && ((bitmap[i] | 2147483647) == 2147483647))
+		i++;
+	if (i != 16)
+		return (0);
+	return (1);
+}
+
+void ft_sortbitmap(unsigned int *bitmap)
+{
+	int i;
+
+	i = 0;
+	while (!bitmap[0])
+		ft_shiftup(bitmap);
+	while (ft_mask(bitmap))
+		ft_shiftleft(bitmap);
+}
+	
 void	ft_showint(unsigned int x)
 {
 	int		i;
