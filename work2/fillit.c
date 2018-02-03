@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 15:25:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/02/03 16:45:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/02/03 17:24:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ void	ft_sort(unsigned char *tetrimino)
 	
 }
 
+void	ft_lstaddlast(t_list **alst, t_list *new)
+{
+	t_list *current;
+
+	current = *alst;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new;
+}
+
 t_list	**ft_readfile(int ac, char **av)
 {
 	int fd;
@@ -117,11 +127,13 @@ t_list	**ft_readfile(int ac, char **av)
 		{
 			*tetri = ft_lstnew(bitflag, order);	
 			i++;
+			ft_putstr("alive\n");
 		}
 		else
 		{
 			next = ft_lstnew(bitflag, order);
-			ft_lstadd(tetri, next);
+			
+			ft_lstaddlast(tetri, next);
 			i++;
 		}
 		order++;
