@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 15:25:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/02/03 18:18:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/02/04 18:56:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,24 @@ t_list	**ft_readfile(int ac, char **av)
 
 	return (tetri);
 }
+
 void	ft_printlist(t_list **tetri)
 { 
 	int end;
-	t_list **temp;
+	t_list *temp;
 
-	temp = tetri;
+	temp = *tetri;
 	end = 0;
-	while (end < 2)
+	while (temp != NULL)
 	{
-		ft_putchar( (*temp)->order);
+		ft_putchar( temp->order);
 		ft_putchar('\n');
-		ft_showtetrimino((*temp)->content);
+		ft_showtetrimino(temp->content);
 		ft_putchar('\n');
-		if (end == 0)
-			*temp = (*temp)->next;
-		else
-			end = 2;
-		if ( (*temp)->next == NULL && end == 0)	
-			end = 1;
+		temp = temp->next;
 	}
-
-
 }
+
 int	ft_solver(t_list **tetri);
 
 int main(int argc, char **argv)
@@ -104,7 +99,7 @@ int main(int argc, char **argv)
 	tetri = ft_readfile(argc, argv);
 	if (tetri == NULL)
 		return (0);
-/*	ft_printlist(tetri);*/
+	ft_printlist(tetri);
 	ft_solver(tetri);
 
 }

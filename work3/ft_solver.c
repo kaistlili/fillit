@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:39:23 by ktlili            #+#    #+#             */
-/*   Updated: 2018/02/03 18:13:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/02/04 18:59:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,30 @@ unsigned int	*ft_tobitmap(unsigned char *tetri)
 	ft_sortbitmap(bitmap);
 	return (bitmap);
 }
+/*
+void	ft_place(unsigned int *bitmap, unsigned char *tetri, int pos)
+{
 
+}*/
+int	ft_permutations(t_list **tetri, int size)
+{
+
+}
 int	ft_solver(t_list **tetri)
 {
 	unsigned int *first;
+	t_list *current;
+	int size;
 
+	size = 0;
+	current = *tetri;
+	while (current != NULL)
+	{
+		size++;
+		current = current->next;
+	}
 	first = ft_tobitmap((*tetri)->content);
+	
 	ft_showbitmap(first);
 	return (1);	
 }
