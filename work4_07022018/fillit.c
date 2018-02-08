@@ -23,6 +23,7 @@ int	ft_parse(char *buffer, unsigned char *tetrimino, int i)
 	ft_bzero(&tetrimino[1], 4);
 	if (ft_tobitflag(buffer, &tetrimino[1]) == -1)
 		return (0);
+	ft_sort(&tetrimino[1]);
 	return (1);
 
 }
@@ -33,9 +34,7 @@ int	ft_readfile(char *file, unsigned char tetri[26][5])
 	int i;
 	int valid;
 	char buffer[20];
-	/*unsigned char **tetri;
-
-	tetri = malloc(sizeof(unsigned char*) * 26);*/
+	
 	if (!(fd = open(file, O_RDONLY)))
 		return (-1);
 	valid = 1;
@@ -50,30 +49,15 @@ int	ft_readfile(char *file, unsigned char tetri[26][5])
 	}
 	tetri[i][0] = '0';
 	if (valid)
-		return (1);
+		return (i);
 	return (-1);
 }
 
-
-int	main(int ac, char **av)
+void	ft_printcomb(unsigned char tetri[26][5])
 {
-	unsigned char tetri[26][5];
 	int i;
-	int ret;
-	if (ac != 2)
-	{
-		ft_putstr("Invalid input.\n");
-		return (0);
-	}
-	ret = ft_readfile(av[1], tetri);
-	printf("returned from read.\n");
-	if (ret == -1)
-	{
-		ft_putstr("Invalid file");
-		return (0);
-	}
-	i = 0;	
-	printf("starting loop\n");
+
+	i = 0;
 	while (tetri[i][0] != '0')
 	{
 		ft_putchar(tetri[i][0]);
@@ -82,4 +66,26 @@ int	main(int ac, char **av)
 		ft_putchar('\n');
 		i++;
 	}		
+}
+
+int	main(int ac, char **av)
+{
+	unsigned char tetri[26][5];
+	int i;
+	int size;
+	if (ac != 2)
+	{
+		ft_putstr("Invalid input.\n");
+		return (0);
+	}
+	size = ft_readfile(av[1], tetri);
+	printf("returned from read.\n");
+	if (size == -1)
+	{
+		ft_putstr("Invalid file");
+		return (0);
+	}
+	printf("size is: %d\n", size);
+	ft_printcomb(tetri);	
+
 }
