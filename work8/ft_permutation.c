@@ -152,19 +152,21 @@ int ft_validplace(unsigned short tetri[26][13], int index, int line)
 	*/
 	counter = 0;
 	temp = line;
-	while (temp > 0)
+	while ((temp > 0) && (tetri[index][12] == 0))
 	{
 		ft_shiftdown(&tetri[index][1]);
 		temp--;
 	}
+	if ((temp != 0) && (tetri[index][12] != 0))
+		return (-1);
 	while (ft_checkborder(&tetri[index][1]) & (!ft_validbitmap(&tetri[25][1], &tetri[index][1])))
 	{
 		ft_shiftright(&tetri[index][1]);
 	}
 	if  (!ft_checkborder(&tetri[index][1]) & (!ft_validbitmap(&tetri[25][1], &tetri[index][1])))
 	{	
-		printf("HOLLA, index is: %d\n", index);
-		return (-1);
+		/*printf("HOLLA, index is: %d\n", index);
+	*/	return (-1);
 	}
 	ft_overlap(&tetri[index][1], &tetri[25][1]);
 	square = ft_square(&tetri[25][1]);
@@ -200,8 +202,9 @@ void	ft_place(unsigned short tetri[26][13],int index, int pos, int *square)
 	g_recursivecalls++;
 	if (tetri[index][0] == 27)
 	{
-		printf("square was: %d\n", *square);
-		if (ft_square(&tetri[25][1]) <= *square);
+		/*printf("square was: %d\n", *square);
+	*/	if (ft_square(&tetri[25][1]) < *square);
+		{
 			*square = ft_square(&tetri[25][1]);
 		printf("done, square is: %d\n", *square);
 		printf("\n");
@@ -213,18 +216,19 @@ void	ft_place(unsigned short tetri[26][13],int index, int pos, int *square)
 		*/
 		/*
 		ft_printbitmap(&tetri[0][1]);*/
+		}
 		return;
 	}
 	len = ft_length(&tetri[25][1]);
-	printf("len is: %d\n", len);
+	/*printf("len is: %d\n", len);*/
 	while (pos <= len)
 	{
-		printf("calling ft_validplace with index: %d pos: %d len: %d square: %d\n", index, pos,len, *square);
-		temp = ft_validplace(tetri, index, pos);
-		printf("ft_validplace return is: %d\n", temp);
-		if ((temp <= *square) & (temp != -1))
+	/*	printf("calling ft_validplace with index: %d pos: %d len: %d square: %d\n", index, pos,len, *square);
+	*/	temp = ft_validplace(tetri, index, pos);/*
+		printf("ft_validplace return is: %d\n", temp);*/
+		if ((temp < *square) & (temp != -1))
 		{
-			printf("exploring index: %d\n", index + 1);
+			/*printf("exploring index: %d\n", index + 1);*/
 			ft_place(tetri, index + 1, 0, square);
 		}
 		/*printf("removing index: %d\n", index);
