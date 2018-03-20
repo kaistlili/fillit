@@ -1,5 +1,5 @@
 NAME = fillit
-SRC = fillit.c ft_util.c ft_permutation.c libft.a 
+SRC = fillit.c ft_util.c ft_permutation.c ft_solver.c libft.a 
 
 FLAG = -Wall -Wextra -Werror 
 

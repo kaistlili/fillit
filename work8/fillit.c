@@ -64,6 +64,7 @@ int	ft_readfile(char *file, unsigned short tetri[26][13])
 }
 
 void ft_place(unsigned short tetri[26][13], int index, int pos, int *square);
+void ft_solvecomb(unsigned short tetri[26][13], int index, int *square);
 
 int	main(int ac, char **av)
 {
@@ -93,14 +94,24 @@ int	main(int ac, char **av)
 		i++;
 	}
 	ft_memcpy(&tetri[25][1],&tetri[0][1],24);
-	ft_printbitmap(&tetri[25][1]);
+/*	ft_printbitmap(&tetri[25][1]);
 	ft_putstr("that was tetri 25\n");
 	ft_printbyorder(tetri);
-
-	size = i;	
-	/*ft_permutation(tetri, 0, size - 1, square);
-	*/
+*/
+	size = i - 1 ;
 	square = 16;
-	ft_place(tetri, 1, 0, &square );
-	printf("\n\n++function called: %d times\n", g_recursivecalls);
+
+
+	ft_permutation(tetri, 0, size, &square);
+/*	ft_solvecomb(tetri, 1, &square);
+	ft_heap_permutation(tetri, size, &square);
+*/	/*ft_solver(tetri,0, size, &square );
+	
+	ft_permutation(tetri, 0, size , square);
+
+	ft_place(tetri, 0, 0, &square );
+*/
+
+printf("\n\n++function called: %d times\n", g_recursivecalls);
+
 }

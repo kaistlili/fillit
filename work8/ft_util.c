@@ -34,7 +34,7 @@ void	ft_showshortbyorder(unsigned short x, char order)
 }
 
 
-void	ft_printorder(unsigned short *bitmap, char order)
+void	ft_printbitmapbyorder(unsigned short *bitmap, char order)
 {
 	int i;
 
@@ -53,9 +53,61 @@ void ft_printbyorder(unsigned short tetri[26][13])
 	i = 0;
 	while (tetri[i][0] != 27)
 	{	
-		ft_printorder(&tetri[i][1], tetri[i][0]);
+		ft_printbitmapbyorder(&tetri[i][1], tetri[i][0]);
 		ft_putchar('\n');
 		i++;
+	}
+}
+
+
+void	ft_bitstoorder(unsigned short x, char order, char *buffer)
+{
+	int		i;
+
+	i = 15;
+	while (i >= 0)
+	{
+		if (x % 2)
+			buffer[i] = order;
+		x = x / 2;
+		i--;
+	}
+	buffer[16] = '\0';
+}
+
+void	ft_getline(unsigned short tetri[26][13], int line, char *buffer)
+{
+	int i;
+
+	i = 0;
+
+	while (tetri[i][0] != 27)
+	{
+		ft_bitstoorder(tetri[i][line], tetri[i][0], buffer);
+		i++;
+	}
+	
+}
+
+
+
+void	ft_printorderbitmap(unsigned short tetri[26][13])
+{
+	int line;
+	char buffer[17];
+	int i;
+
+	buffer[16] = '\0';
+	i = 0;
+	ft_memset(buffer, 46, 16);
+	line = 1; /*tetri bitmap starts at index 1*/
+	while (line < 13)
+	{
+		ft_getline(tetri, line, buffer);
+		ft_putstr(buffer);
+		ft_memset(buffer, 46, 16);
+		ft_putchar('\n');
+		line++;
 	}
 }
 

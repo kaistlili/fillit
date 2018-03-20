@@ -34,10 +34,10 @@ int ft_length(unsigned short *bitmap)
 {
 	int len;
 
-	len = 1;
-	while (bitmap[len] != 0)
-		len++;
-	return (len);
+	len = 11;
+	while (bitmap[len] == 0)
+		len--;
+	return (len + 1);
 }
 
 
@@ -66,18 +66,16 @@ int ft_square(unsigned short *bitmap)
 {
 	int length;
 	int width;
+	int i;
 
-	length = 0;
-	width = 0;/*
-	printf("--------square for:\n");
-	ft_printbitmap(bitmap);
-	printf("\n");*/
-	while (bitmap[length] != 0)
+	i = 0;
+	length = ft_length(bitmap);
+	width = 0;
+	while (i < length)
 	{
-		if (ft_width(bitmap[length]) > width)
-			width = ft_width(bitmap[length]);
-		length++;
-		/*printf("++length is: %d width is: %d\n", length, width);*/
+		if (ft_width(bitmap[i]) > width)
+			width = ft_width(bitmap[i]);
+		i++;
 	}
 	if (width >= length)
 		return (width);
@@ -133,23 +131,13 @@ int	ft_checkborder(unsigned short *tetri)
 	return (0);
 }
 
-int ft_validplace(unsigned short tetri[26][13], int index, int line)
+int ft_validplace(unsigned short tetri[26][13], int index, int line, int order)
 /*return 100 if overlap is invalid, return square if valid;*/
 {
 	unsigned short temp;
 	int square;
 	int counter;
-/*
-	temp = tetri[0][pos + 1];
-	counter = 0;
-	while (temp != 0)
-	{	
-		counter++;
-		ft_shiftright(&tetri[index][1]);
-		temp = temp << 1;
-	}
-	printf("---shifted %d times\n", counter);
-	*/
+
 	counter = 0;
 	temp = line;
 	while ((temp > 0) && (tetri[index][12] == 0))
@@ -159,10 +147,20 @@ int ft_validplace(unsigned short tetri[26][13], int index, int line)
 	}
 	if ((temp != 0) && (tetri[index][12] != 0))
 		return (-1);
-	while (ft_checkborder(&tetri[index][1]) & (!ft_validbitmap(&tetri[25][1], &tetri[index][1])))
+	
+	temp = tetri[25][line];
+	while (temp != 0)
+	{
+		if ((temp & 32767) == 32767)
+		{
+			
+		}
+		temp = temp << 1;
+	}
+	/*while (ft_checkborder(&tetri[index][1]) & (!ft_validbitmap(&tetri[25][1], &tetri[index][1])))
 	{
 		ft_shiftright(&tetri[index][1]);
-	}
+	}*/
 	if  (!ft_checkborder(&tetri[index][1]) & (!ft_validbitmap(&tetri[25][1], &tetri[index][1])))
 	{	
 		/*printf("HOLLA, index is: %d\n", index);
@@ -191,97 +189,65 @@ void	ft_place(unsigned short tetri[26][13],int index, int pos, int *square)
 {
 	int temp;
 	int len;
-	unsigned short save[12];
+	int order;
+	int lastplace;
+	unsigned short save;
 	
-	/*
-	if ((index == 1) & (pos == 0))
+	g_recursivecalls++; /*global variable to track recursive calls count*/
+	if (tetri[index][0] == 27) /*if all tetri placed, check square and print if smaller then previous*/
 	{
-	ft_bzero(save, 24);
-	ft_memcpy(save, &tetri[0][1], 24);
-	}*/
-	g_recursivecalls++;
-	if (tetri[index][0] == 27)
-	{
-		/*printf("square was: %d\n", *square);
-	*/	if (ft_square(&tetri[25][1]) < *square);
+		if (ft_square(&tetri[25][1]) < *square);
 		{
 			*square = ft_square(&tetri[25][1]);
-		printf("done, square is: %d\n", *square);
-		printf("\n");
-		ft_putstr("solution:\n");
-		ft_printbitmap(&tetri[25][1]);
-		ft_putstr("\n");
-		ft_printbyorder(tetri);
-		/*ft_memcpy(&tetri[25][1], &tetri[0][1], 24);
-		*/
-		/*
-		ft_printbitmap(&tetri[0][1]);*/
+			printf("done, solution found, square is: %d\n\n", *square);
+			ft_putstr("solution is:\n");
+			ft_printbitmap(&tetri[25][1]);
+			ft_putstr("\n");
+			ft_printbyorder(tetri);
 		}
 		return;
 	}
 	len = ft_length(&tetri[25][1]);
-	/*printf("len is: %d\n", len);*/
+	order = 0;
+	lastplace = 2;
 	while (pos <= len)
 	{
-	/*	printf("calling ft_validplace with index: %d pos: %d len: %d square: %d\n", index, pos,len, *square);
-	*/	temp = ft_validplace(tetri, index, pos);/*
-		printf("ft_validplace return is: %d\n", temp);*/
-		if ((temp < *square) & (temp != -1))
+		save = pos;
+		while (save)
 		{
-			/*printf("exploring index: %d\n", index + 1);*/
-			ft_place(tetri, index + 1, 0, square);
+			ft_shiftdown(&tetri[index][1]);
+			save--;
 		}
-		/*printf("removing index: %d\n", index);
-		ft_printbitmap(&tetri[25][1]);
-		ft_putchar('\n');*/
-		if (temp != -1)
-			ft_removetetri(&tetri[index][1], &tetri[25][1]);
+		save =  tetri[25][pos + 1];
+		lastplace = 2;
+		while (((save != 0) | (lastplace > 0)) & (ft_checkborder(&tetri[index][1])))
+		{
+			if ((save & 32768) == 0) /*if current bit in current line is 0 then check if valid placement*/
+			{	
+				ft_validbitmap(&tetri[25][1], &tetri[index][1]);
+				if (ft_validbitmap(&tetri[25][1], &tetri[index][1])) /*if valid overlap current tetri on bitmap and check square*/
+				{
+					ft_overlap(&tetri[index][1], &tetri[25][1]);
+					if (ft_square(&tetri[25][1]) < *square) /*if current square < previous square explore further (recrusive call) */
+						ft_place(tetri, index + 1, 0, square);
+					
+					ft_removetetri(&tetri[index][1], &tetri[25][1]);
+				}
+			}
+			save = save << 1;
+			if (save == 0) /*if current line is 0 iterate one last time*/
+				lastplace--;
+			ft_shiftright(&tetri[index][1]);
+			order++;
+		}
 		ft_sortbitmap(&tetri[index][1]);
 		pos++;
 	}
 }
 
-void	ft_permutation(unsigned short tetri[26][13], int start, int end, int square)
-{
-	int	i;
-	int j;
-	
-	/*printf("call. start: %d\n", start);*/
-	j = 0;
-	if (start == end)
-	{
-		while (tetri[j][0] != 27)
-		{
-			ft_putchar(tetri[j][0] + 65);
-			ft_putchar('-');
-			j++;
-		}
-		j = 0;
-		ft_putstr("|\n");
-	}
-	else
-	{
-		i = start;
-		while(i <= end)
-		{	
-			ft_putstr("i is:");
-			ft_putnbr(i);
-			ft_putstr("\n");
-			ft_swapbitmap(tetri[start], tetri[i]);
-			ft_permutation(tetri, start + 1, end, square);
-/*			ft_putstr("backtrack i is-");
-			ft_putnbr(i);
-			putchar('\n');*/
-			ft_swapbitmap(tetri[start], tetri[i]);
-			i++;
-		}
-	}
-
-}
 
 
-
-void	ft_heap_permutation(unsigned short tetri[26][13], int size, int square)
+void	ft_heap_permutation(unsigned short tetri[26][13], int size, int *square)
 {
 	int i;
 	int j;
@@ -289,22 +255,14 @@ void	ft_heap_permutation(unsigned short tetri[26][13], int size, int square)
 	j = 0;
 	if (size == 1)
 	{
-		while (tetri[j][0] != 27)
-		{
-			ft_putchar(tetri[j][0] + 65);
-			ft_putchar('-');
-			j++;
-		}
-		j = 0;
-		ft_putchar('|');
+		ft_memcpy(&tetri[25][1], &tetri[0][1], 24);	
+		ft_place(tetri, 1, 0, square);
 		return;
 	}
 	i = 0;
 	while (i < size)
 	{
-		ft_putstr("\nloop\n");
 		ft_putchar(tetri[size-1][0] + 65);
-		ft_putstr("\n\n");
 		ft_heap_permutation(tetri, size - 1, square);
 		if (size % 2 == 1)
 			ft_swapbitmap(tetri[0], tetri[size - 1]);
