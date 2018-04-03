@@ -27,6 +27,24 @@ void	ft_swapbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
 		i++;
 	}
 }
+int ft_comparetetri(unsigned short *tetri1, unsigned short *tetri2)
+{
+	int i;
+
+	i = 0;
+
+	while (i < 12)
+	{
+		if (tetri1[i] ^ tetri2[i] == 0)
+			i++;
+		else
+			i = 99;
+	}
+	if (i == 99)
+		return (0);
+	return (1);
+}
+
 
 #include <stdio.h>
 void	ft_permutation(unsigned short tetri[26][13], int start, int end, int square)
@@ -51,15 +69,15 @@ void	ft_permutation(unsigned short tetri[26][13], int start, int end, int square
 	{
 		i = start;
 		while(i <= end)
-		{	
-			ft_putstr("i is:");
-			ft_putnbr(i);
-			ft_putstr("\n");
+		{
+			if (ft_comparetetri(&tetri[start][1], &tetri[i][1]))
+			
+			printf("tetri %d and %d are the same\n", start, i);
+			else
+			
+				printf("tetri %d and %d are not the same\n", start, i);
 			ft_swapbitmap(tetri[start], tetri[i]);
 			ft_permutation(tetri, start + 1, end, square);
-			ft_putstr("backtrack i is-");
-			ft_putnbr(i);
-			putchar('\n');
 			ft_swapbitmap(tetri[start], tetri[i]);
 			i++;
 		}
