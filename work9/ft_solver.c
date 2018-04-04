@@ -143,41 +143,41 @@ void	ft_permutation(unsigned short tetri[26][13], int start, int end, int *squar
 	{
 		i = start;
 		while (i <= end)
-		{
-			
+		{	
 			currentline = 0;
-			while (currentline < *square)
+			while ((currentline < *square) & (ft_checkborder(&tetri[i][1])))
 			{
-				while ((j == 1) & (ft_checkborder(&tetri[start][1])))
+				printf("Trying index: %d on line %d\r", i, currentline);
+				while ((j == 1) & (ft_checkborder(&tetri[i][1])))
 				{
-					printf("trying %d last sqr: %d\n", i, *square);
-					ft_printbitmap(&tetri[i][1]);
-					printf("on\n");	
-					ft_printbitmap(&tetri[25][1]);
+		//			printf("trying %d last sqr: %d\n", i, *square);
+		//			ft_printbitmap(&tetri[i][1]);
+		//			printf("on\n");	
+		//			ft_printbitmap(&tetri[25][1]);
 					if (ft_validbitmap(&tetri[25][1], &tetri[i][1]))
 					{
 						ft_overlap(&tetri[i][1], &tetri[25][1]);
 						if (ft_square(&tetri[25][1]) < *square)
 						{
-							printf("\tswapping %d with i: %d", start, i);
+		//					printf("\tswapping %d with i: %d", start, i);
 							ft_swapbitmap(tetri[start], tetri[i]);
 							ft_permutation(tetri, start + 1, end, square);
 							ft_swapbitmap(tetri[start], tetri[i]);
-							printf("returned swapping %d with i: %d\n", start, i);
+		//					printf("returned swapping %d with i: %d\n", start, i);
 						}
 						else
 							j = 0;
 						ft_removetetri(&tetri[i][1], &tetri[25][1]);
 					}
-					printf("shifting right\n");
+		//			printf("shifting right\n");
 					ft_shiftright(&tetri[i][1]);
 				}
 				j = 1;
-				printf("\tgetting next line\n");
+		//		printf("\tgetting next line\n");
 				ft_sortnextline(&tetri[i][1]);
 				currentline++;
 			}
-			printf("****\t*sorting %d\n",i);
+		//	printf("****\t*sorting %d\n",i);
 			ft_sortbitmap(&tetri[i][1]);
 			i++;			
 		}
