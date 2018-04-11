@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 13:59:40 by ktlili            #+#    #+#             */
+/*   Created: 2018/01/25 17:59:40 by ktlili            #+#    #+#             */
 /*   Updated: 2018/04/08 19:53:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ void	ft_sortnextline(unsigned short *tetri)
 }
 
 
-void ft_printcombination(unsigned short tetri[26][13])
+void ft_printcombination(unsigned short tetri[27][17])
 {
 	int i;
 
@@ -74,7 +74,7 @@ void	ft_swapbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
 	unsigned short temp;
 
 	i = 0;
-	while (i < 13)
+	while (i < 17)
 	{
 		temp = bitmap1[i];
 		bitmap1[i] = bitmap2[i];
@@ -215,7 +215,7 @@ void	ft_printbitmapbyorder(unsigned short *bitmap, char order)
 		i++;
 	}
 }
-void ft_printbyorder(unsigned short tetri[26][13])
+void ft_printbyorder(unsigned short tetri[27][17])
 {
 	int i;
 
@@ -243,7 +243,7 @@ void	ft_bitstoorder(unsigned short x, char order, char *buffer)
 	}
 }
 
-void	ft_getline(unsigned short tetri[26][13], int line, char *buffer)
+void	ft_getline(unsigned short tetri[27][17], int line, char *buffer)
 {
 	int i;
 
@@ -255,7 +255,7 @@ void	ft_getline(unsigned short tetri[26][13], int line, char *buffer)
 	}	
 }
 
-void	ft_printorderbitmap(unsigned short tetri[26][13], int square)
+void	ft_printorderbitmap(unsigned short tetri[27][17], int square)
 {
 	int line;
 	char buffer[square + 1];

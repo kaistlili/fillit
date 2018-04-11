@@ -25,21 +25,23 @@ int	ft_parse(char *buffer, unsigned short *tetrimino, int i)
 
 	j = 1;
 	ft_bzero(temp, 4);
-	ft_bzero(tetrimino,13*2);
+	ft_bzero(tetrimino,17*2);
 	tetrimino[0] = i;
 	if (ft_tobitflag(buffer, temp) == -1)
 		return (0);
+	
+	printf("\ntetri %c\n", i);
 	ft_showtetrimino(temp);
 	while ( j <= 4)
 	{
-		tetrimino[j] = temp[j -1];
+		tetrimino[j] = temp[j - 1];
 	   	j++;
 	}
 	return (1);
 
 }
 
-int	ft_readfile(char *file, unsigned short tetri[26][13])
+int	ft_readfile(char *file, unsigned short tetri[27][17])
 {
 	int fd;
 	int i;
@@ -63,14 +65,14 @@ int	ft_readfile(char *file, unsigned short tetri[26][13])
 
 }
 
-void ft_place(unsigned short tetri[26][13], int index, int pos, int *square);
-void ft_solvecomb(unsigned short tetri[26][13], int index, int *square);
-int 	solve(unsigned short tetri[26][13], int *square, int index);
+void ft_place(unsigned short tetri[27][17], int index, int pos, int *square);
+void ft_solvecomb(unsigned short tetri[27][17], int index, int *square);
+int 	solve(unsigned short tetri[27][17], int *square, int index);
 
 
 int	main(int ac, char **av)
 {
-	unsigned short tetri[26][13];
+	unsigned short tetri[27][17];
 	int i;
 	int size;
 	int ret;
