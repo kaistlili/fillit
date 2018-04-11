@@ -45,7 +45,7 @@ void	ft_placenext(unsigned short tetri[26][13], int index, int end, int *square)
 
 /**/
 
-void	ft_printorderbitmap(unsigned short tetri[26][13]);
+void	ft_printorderbitmap(unsigned short tetri[26][13], int square);
 int ft_length(unsigned short *bitmap);
 int ft_width(unsigned short data);
 int ft_square(unsigned short *bitmap);

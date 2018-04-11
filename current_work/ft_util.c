@@ -241,7 +241,6 @@ void	ft_bitstoorder(unsigned short x, char order, char *buffer)
 		x = x / 2;
 		i--;
 	}
-	buffer[16] = '\0';
 }
 
 void	ft_getline(unsigned short tetri[26][13], int line, char *buffer)
@@ -256,21 +255,22 @@ void	ft_getline(unsigned short tetri[26][13], int line, char *buffer)
 	}	
 }
 
-void	ft_printorderbitmap(unsigned short tetri[26][13])
+void	ft_printorderbitmap(unsigned short tetri[26][13], int square)
 {
 	int line;
-	char buffer[17];
+	char buffer[square + 1];
 	int i;
 
-	buffer[16] = '\0';
+	buffer[square] = '\0';
 	i = 0;
-	ft_memset(buffer, 46, 16);
+	ft_memset(buffer, 46, square);
 	line = 1; /*tetri bitmap starts at index 1*/
-	while (line < 13)
+	while (line < (square + 1))
 	{
 		ft_getline(tetri, line, buffer);
 		ft_putstr(buffer);
-		ft_memset(buffer, 46, 16);
+		ft_memset(buffer, 46, square);
+		buffer[square] = '\0';
 		ft_putchar('\n');
 		line++;
 	}

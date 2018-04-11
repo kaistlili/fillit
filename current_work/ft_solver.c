@@ -48,7 +48,7 @@ int solve(unsigned short tetri[26][13],int *square, int index)
 		{
 			*square = ft_square(&tetri[25][1]);
 			printf("solved. new square is: %d\n", *square);
-			ft_printorderbitmap(tetri);
+			ft_printorderbitmap(tetri, *square);
 			return (1);
 		}
 		return (0);
