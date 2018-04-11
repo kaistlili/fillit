@@ -95,25 +95,8 @@ int	main(int ac, char **av)
 		i++;
 	}
 	ft_bzero(&tetri[25][1], 24);
-/*	ft_memcpy(&tetri[25][1],&tetri[0][1],24);
-	ft_printbitmap(&tetri[25][1]);
-	ft_putstr("that was tetri 25\n");
-	ft_printbyorder(tetri);
-*/
-	size = i - 1 ;
 	square = 16;
-
 	solve(tetri, &square, 0);
-/*	ft_solve_all(tetri, 0, size, &square);
-	ft_solvecomb(tetri, 1, &square);
-	ft_heap_permutation(tetri, size, &square);
-*/	/*ft_solver(tetri,0, size, &square );
-	
-	ft_permutation(tetri, 0, size , square);
-
-	ft_place(tetri, 0, 0, &square );
-*/
-
-printf("\n\n++function called: %d times\n", g_recursivecalls);
+	printf("\n\n++function called: %d times. smallest square found %d\n", g_recursivecalls, square);
 
 }
