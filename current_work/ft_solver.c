@@ -44,13 +44,14 @@ int solve(unsigned short tetri[26][13],int *square, int index)
 	g_recursivecalls++;
 	if (tetri[index][0] == 27)
 	{
-	/*	if (ft_square(&tetri[25][1]) < *square)
-	*/	
+		if (ft_square(&tetri[25][1]) < *square)
+		{
 			*square = ft_square(&tetri[25][1]);
 			printf("solved. new square is: %d\n", *square);
 			ft_printorderbitmap(tetri);
 			return (1);
-		
+		}
+		return (0);
 	} 
 	j = 1;
 	currentline = 0;
@@ -78,9 +79,7 @@ int solve(unsigned short tetri[26][13],int *square, int index)
          ft_sortnextline(&tetri[index][1]);
          currentline++;
      }
-	// printf("finished testing index %d   ", index);
 	 ft_sortbitmap(&tetri[index][1]);
-   //  ft_removetetri(&tetri[index][1], &tetri[25][1]);
 	 return (0);
 }
 
