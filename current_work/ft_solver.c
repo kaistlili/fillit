@@ -25,8 +25,7 @@ int	ft_placable(unsigned short *bitmap, unsigned short *tetri, int square, int *
 		else
 		{
 			*j = 0;
-			
-            ft_removetetri(tetri, bitmap);
+            		ft_removetetri(tetri, bitmap);
 			return (0);
 		}	
 	}
