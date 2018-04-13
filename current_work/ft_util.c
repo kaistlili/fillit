@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:59:40 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/13 08:57:48 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/13 09:12:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,21 +363,6 @@ void ft_sortbitmap(unsigned short *bitmap)
 		ft_shiftleft(bitmap);
 }
 	
-void	ft_showint(unsigned int x)
-{
-	int		i;
-	char	buffer[33];
-
-	i = 31;
-	while (i >= 0)
-	{
-		buffer[i] = (x % 2) + '0';
-		x = x / 2;
-		i--;
-	}
-	buffer[32] = '\0';
-	ft_putstr(buffer);
-}
 
 void	ft_showshort(unsigned short x)
 {
@@ -419,14 +404,6 @@ void	ft_showbitmap(unsigned int *bitmap)
 		ft_putchar('\n');
 		i++;
 	}
-}
-void	ft_swap(unsigned char *a, unsigned char *b)
-{
-	unsigned char temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
 }
 
 void ft_showtetrimino(unsigned char *tetrimino)
