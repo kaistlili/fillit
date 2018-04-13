@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:39:23 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/09 20:17:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/13 08:48:46 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,21 @@ int	ft_placable(unsigned short *bitmap, unsigned short *tetri, int square, int *
 
 
 // we can ditch the J variable by breaking loop when ft_square(tetri[index]) > *square
-int solve(unsigned short tetri[27][17],int *square, int index)
+int solve(unsigned short tetri[28][17],int *square, int index, char solution[17][17])
 {
 	int currentline;
 	int j;
 	int decision;
-
+	
 	g_recursivecalls++;
 	if (tetri[index][0] == 27)
 	{
-		if (ft_square(&tetri[25][1]) < *square)
+		if (ft_square(&tetri[26][1]) < *square)
 		{
-			*square = ft_square(&tetri[25][1]);
-			printf("solved. new square is: %d\n", *square);
-			ft_printorderbitmap(tetri, *square);
+			*square = ft_square(&tetri[26][1]);
+			ft_save_solution(tetri, *square, solution);
+			/*			printf("solved. new square is: %d\n", *square);
+			ft_printorderbitmap(tetri, *square);*/
 		}
 		return (1);
 	} 
@@ -61,12 +62,12 @@ int solve(unsigned short tetri[27][17],int *square, int index)
 		/*	printf("trying tetri %d\n", index);
 			ft_printbitmap(&tetri[index][1]);
 			printf("on bitmap\n");
-			ft_printbitmap(&tetri[25][1]);
-		*/	decision = ft_placable(&tetri[25][1], &tetri[index][1], *square, &j);
+			ft_printbitmap(&tetri[26][1]);
+		*/	decision = ft_placable(&tetri[26][1], &tetri[index][1], *square, &j);
 			if ((decision  < *square) & (decision > 0))
 			{
-				solve(tetri, square, index + 1);
-				ft_removetetri(&tetri[index][1], &tetri[25][1]);
+				solve(tetri, square, index + 1, solution);
+				ft_removetetri(&tetri[index][1], &tetri[26][1]);
 			}
 			ft_shiftright(&tetri[index][1]);
 		}

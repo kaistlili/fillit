@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:59:40 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/08 19:53:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/13 08:57:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sortnextline(unsigned short *tetri)
 }
 
 
-void ft_printcombination(unsigned short tetri[27][17])
+void ft_printcombination(unsigned short tetri[28][17])
 {
 	int i;
 
@@ -215,7 +215,7 @@ void	ft_printbitmapbyorder(unsigned short *bitmap, char order)
 		i++;
 	}
 }
-void ft_printbyorder(unsigned short tetri[27][17])
+void ft_printbyorder(unsigned short tetri[28][17])
 {
 	int i;
 
@@ -243,7 +243,7 @@ void	ft_bitstoorder(unsigned short x, char order, char *buffer)
 	}
 }
 
-void	ft_getline(unsigned short tetri[27][17], int line, char *buffer)
+void	ft_getline(unsigned short tetri[28][17], int line, char *buffer)
 {
 	int i;
 
@@ -255,7 +255,20 @@ void	ft_getline(unsigned short tetri[27][17], int line, char *buffer)
 	}	
 }
 
-void	ft_printorderbitmap(unsigned short tetri[27][17], int square)
+void	ft_save_solution(unsigned short tetri[28][17], int square,char solution[17][17])
+{
+	int line;
+
+	line = 1; /*tetri bitmap starts at index 1*/
+	while (line < (square + 1))
+	{
+		ft_memset(solution[line - 1], 46, 17);
+		ft_getline(tetri, line, solution[line - 1]);	
+		solution[line - 1][square] = '\0';
+		line++;
+	}
+}
+void	ft_printorderbitmap(unsigned short tetri[28][17], int square)
 {
 	int line;
 	char buffer[square + 1];
@@ -269,7 +282,7 @@ void	ft_printorderbitmap(unsigned short tetri[27][17], int square)
 	{
 		ft_getline(tetri, line, buffer);
 		ft_putstr(buffer);
-		ft_memset(buffer, 46, square);
+		ft_memset(buffer, 46, 17);
 		buffer[square] = '\0';
 		ft_putchar('\n');
 		line++;

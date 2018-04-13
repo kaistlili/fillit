@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:57:55 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/08 18:50:32 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/13 08:51:57 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 extern int g_recursivecalls;
 
 void	ft_sortnextline(unsigned short *tetri);
-void	ft_solve_all(unsigned short tetri[27][17], int start, int end, int *square);
+void	ft_solve_all(unsigned short tetri[28][17], int start, int end, int *square);
 void	ft_swapbitmap(unsigned short *bitmap1, unsigned short *bitmap2);
-void	ft_heap_permutation(unsigned short tetri[27][17], int size, int *square);
+void	ft_heap_permutation(unsigned short tetri[28][17], int size, int *square);
 void	ft_shiftleft(unsigned short *bitmap);
 void	ft_shiftright(unsigned short *bitmap);
 void	ft_shiftup(unsigned short *bitmap);
@@ -36,16 +36,16 @@ void	ft_shift(unsigned char *tetrimino);
 void	ft_sort(unsigned char *tetrimino);
 void	ft_showshortbyorder(unsigned short x, char order);
 void	ft_printorder(unsigned short *bitmap, char order);
-void	ft_printbyorder(unsigned short tetri[27][17]);
+void	ft_printbyorder(unsigned short tetri[28][17]);
 void	ft_swapbitmap(unsigned short *bitmap1, unsigned short *bitmap2);
 int		ft_mask(unsigned short *bitmap);
 /**/
-void	ft_solver(unsigned short tetri[27][17], int start, int end, int *square);
-void	ft_placenext(unsigned short tetri[27][17], int index, int end, int *square);
+void	ft_solver(unsigned short tetri[28][17], int start, int end, int *square);
+void	ft_placenext(unsigned short tetri[28][17], int index, int end, int *square);
 
 /**/
-
-void	ft_printorderbitmap(unsigned short tetri[27][17], int square);
+void	ft_save_solution(unsigned short[28][17], int square, char solution[17][17]);
+void	ft_printorderbitmap(unsigned short tetri[28][17], int square);
 int ft_length(unsigned short *bitmap);
 int ft_width(unsigned short data);
 int ft_square(unsigned short *bitmap);
