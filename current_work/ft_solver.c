@@ -39,9 +39,7 @@ int solve(unsigned short tetri[28][17],int *square, int index, char solution[17]
 {
 	int currentline;
 	int j;
-	int decision;
 	
-	g_recursivecalls++;
 	if (tetri[index][0] == 27)
 	{
 		if (ft_square(&tetri[26][1]) < *square)
@@ -54,7 +52,6 @@ int solve(unsigned short tetri[28][17],int *square, int index, char solution[17]
 	{
 		while ((j == 1) && (ft_checkborder(&tetri[index][1])))
 		{
-			g_trials++;
 			if ((ft_placable(&tetri[26][1], &tetri[index][1], *square, &j)> 0))
 			{
 				solve(tetri, square, index + 1, solution);

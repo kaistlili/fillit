@@ -65,6 +65,7 @@ int	ft_tobitflag(char *buffer, unsigned short *flags)
 	ft_sortbitmap(flags);
 	return (1);
 }
+
 int	ft_readnext(char *buffer, unsigned short *tetrimino, int i)
 {
 	int j;
@@ -138,8 +139,6 @@ void	ft_printsolution(char solution[17][17], int square)
  * - solve function has to be shorter.
  * - ????
  */
-int 	solve(unsigned short tetri[28][17], int *square, int index, char solution[17][17]);
-
 
 int	main(int ac, char **av)
 {

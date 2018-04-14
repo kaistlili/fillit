@@ -18,6 +18,7 @@
 extern int g_recursivecalls;
 extern int g_trials;
 
+int 	solve(unsigned short tetri[28][17], int *square, int index, char solution[17][17]);
 void	ft_sortnextline(unsigned short *tetri);
 void	ft_shiftleft(unsigned short *bitmap);
 void	ft_shiftright(unsigned short *bitmap);
