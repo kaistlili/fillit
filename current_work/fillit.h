@@ -16,6 +16,7 @@
 #include "libft.h"
 
 extern int g_recursivecalls;
+extern int g_trials;
 
 void	ft_sortnextline(unsigned short *tetri);
 void	ft_shiftleft(unsigned short *bitmap);
@@ -33,7 +34,7 @@ void	ft_showshortbyorder(unsigned short x, char order);
 void	ft_printorder(unsigned short *bitmap, char order);
 void	ft_printbyorder(unsigned short tetri[28][17]);
 int		ft_mask(unsigned short *bitmap);
-void	ft_save_solution(unsigned short[28][17], int square, char solution[17][17]);
+void	ft_save_solution(unsigned short[28][17], int *square, char solution[17][17]);
 void	ft_printorderbitmap(unsigned short tetri[28][17], int square);
 int		ft_length(unsigned short *bitmap);
 int		ft_width(unsigned short data);

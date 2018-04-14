@@ -21,7 +21,7 @@ int	ft_placable(unsigned short *bitmap, unsigned short *tetri, int square, int *
 	{
 		ft_overlap(tetri, bitmap); 
 		if (ft_square(bitmap) < square)
-			return(ft_square(bitmap));
+			return(1);
 		else
 		{
 			*j = 0;
@@ -30,7 +30,7 @@ int	ft_placable(unsigned short *bitmap, unsigned short *tetri, int square, int *
 		}	
 	}
 	else
-		return (-1);
+		return (0);
 }
 
 
@@ -45,12 +45,7 @@ int solve(unsigned short tetri[28][17],int *square, int index, char solution[17]
 	if (tetri[index][0] == 27)
 	{
 		if (ft_square(&tetri[26][1]) < *square)
-		{
-			*square = ft_square(&tetri[26][1]);
-			ft_save_solution(tetri, *square, solution);
-			/*			printf("solved. new square is: %d\n", *square);
-			ft_printorderbitmap(tetri, *square);*/
-		}
+			ft_save_solution(tetri, square, solution);
 		return (1);
 	} 
 	j = 1;
@@ -59,12 +54,8 @@ int solve(unsigned short tetri[28][17],int *square, int index, char solution[17]
 	{
 		while ((j == 1) && (ft_checkborder(&tetri[index][1])))
 		{
-		/*	printf("trying tetri %d\n", index);
-			ft_printbitmap(&tetri[index][1]);
-			printf("on bitmap\n");
-			ft_printbitmap(&tetri[26][1]);
-		*/	decision = ft_placable(&tetri[26][1], &tetri[index][1], *square, &j);
-			if ((decision  < *square) & (decision > 0))
+			g_trials++;
+			if ((ft_placable(&tetri[26][1], &tetri[index][1], *square, &j)> 0))
 			{
 				solve(tetri, square, index + 1, solution);
 				ft_removetetri(&tetri[index][1], &tetri[26][1]);

@@ -24,7 +24,6 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int					ft_tobitflag(char *buffer, unsigned char *flag);
 void				ft_showbits(unsigned char c);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

@@ -255,16 +255,17 @@ void	ft_getline(unsigned short tetri[28][17], int line, char *buffer)
 	}	
 }
 
-void	ft_save_solution(unsigned short tetri[28][17], int square,char solution[17][17])
+void	ft_save_solution(unsigned short tetri[28][17], int *square,char solution[17][17])
 {
 	int line;
 
+	*square = ft_square(&tetri[26][1]);
 	line = 1; /*tetri bitmap starts at index 1*/
-	while (line < (square + 1))
+	while (line < (*square + 1))
 	{
 		ft_memset(solution[line - 1], 46, 17);
 		ft_getline(tetri, line, solution[line - 1]);	
-		solution[line - 1][square] = '\0';
+		solution[line - 1][*square] = '\0';
 		line++;
 	}
 }
