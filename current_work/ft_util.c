@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:59:40 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/13 09:27:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/15 07:58:46 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,6 @@ void	ft_sortnextline(unsigned short *tetri)
 	ft_shiftdown(tetri);
 }
 
-
-void ft_printcombination(unsigned short tetri[28][17])
-{
-	int i;
-
-	i = 0;
-	while (tetri[i][0] != 27)
-	{
-		ft_putchar(tetri[i][0]);
-		ft_putchar('-');
-		i++;
-	}
-	ft_putchar('\n');
-
-}
-
-int ft_comparetetri(unsigned short *tetri1, unsigned short *tetri2)
-{
-	int i;
-
-	i = 0;
-
-	while (i < 12)
-	{
-		if ((tetri1[i] ^ tetri2[i]) == 0)
-			i++;
-		else
-			i = 99;
-	}
-	if (i == 99)
-		return (0);
-	return (1);
-}
-
-
 void	ft_removetetri(unsigned short *tetri, unsigned short *bitmap)
 {
 	int i;
@@ -67,21 +32,6 @@ void	ft_removetetri(unsigned short *tetri, unsigned short *bitmap)
 	}
 }
 
-
-void	ft_swapbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
-{
-	int i;
-	unsigned short temp;
-
-	i = 0;
-	while (i < 17)
-	{
-		temp = bitmap1[i];
-		bitmap1[i] = bitmap2[i];
-		bitmap2[i] = temp;
-		i++;
-	}
-}
 
 int ft_length(unsigned short *bitmap)
 {
@@ -182,53 +132,6 @@ int	ft_checkborder(unsigned short *tetri)
 	return (0);
 }
 
-
-void	ft_showshortbyorder(unsigned short x, char order)
-{
-	int		i;
-	char buffer[17];
-
-	i = 15;
-	while (i >= 0)
-	{
-		if (x % 2)
-			buffer[i] = order;
-		else
-		buffer[i] = '0';
-		x = x / 2;
-		i--;
-	}
-	buffer[16] = '\0';
-	ft_putstr(buffer);
-}
-
-
-void	ft_printbitmapbyorder(unsigned short *bitmap, char order)
-{
-	int i;
-
-	i = 0;
-	while (i < 12)
-	{
-		ft_showshortbyorder(bitmap[i], order);
-		ft_putchar('\n');
-		i++;
-	}
-}
-void ft_printbyorder(unsigned short tetri[28][17])
-{
-	int i;
-
-	i = 0;
-	while (tetri[i][0] != 27)
-	{	
-		ft_printbitmapbyorder(&tetri[i][1], tetri[i][0]);
-		ft_putchar('\n');
-		i++;
-	}
-}
-
-
 void	ft_bitstoorder(unsigned short x, char order, char *buffer)
 {
 	int		i;
@@ -266,26 +169,6 @@ void	ft_save_solution(unsigned short tetri[28][17], int *square,char solution[17
 		ft_memset(solution[line - 1], 46, 17);
 		ft_getline(tetri, line, solution[line - 1]);	
 		solution[line - 1][*square] = '\0';
-		line++;
-	}
-}
-void	ft_printorderbitmap(unsigned short tetri[28][17], int square)
-{
-	int line;
-	char buffer[square + 1];
-	int i;
-
-	buffer[square] = '\0';
-	i = 0;
-	ft_memset(buffer, 46, square);
-	line = 1; /*tetri bitmap starts at index 1*/
-	while (line < (square + 1))
-	{
-		ft_getline(tetri, line, buffer);
-		ft_putstr(buffer);
-		ft_memset(buffer, 46, 17);
-		buffer[square] = '\0';
-		ft_putchar('\n');
 		line++;
 	}
 }
@@ -362,102 +245,4 @@ void ft_sortbitmap(unsigned short *bitmap)
 		ft_shiftup(bitmap);
 	while (ft_mask(bitmap))
 		ft_shiftleft(bitmap);
-}
-	
-
-void	ft_showshort(unsigned short x)
-{
-	int		i;
-	char buffer[17];
-
-	i = 15;
-	while (i >= 0)
-	{
-		buffer[i] = (x % 2) + '0';
-		x = x / 2;
-		i--;
-	}
-	buffer[16] = '\0';
-	ft_putstr(buffer);
-}
-
-
-void	ft_printbitmap(unsigned short *bitmap)
-{
-	int i;
-
-	i = 0;
-	while (i < 12)
-	{
-		ft_showshort(bitmap[i]);
-		ft_putchar('\n');
-		i++;
-	}
-}
-
-void ft_showtetrimino(unsigned char *tetrimino)
-{
-	int i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_showbits(tetrimino[i]);
-		ft_putchar('\n');
-		i++;
-	}
-}
-
-void	ft_shift(unsigned char *tetrimino)
-{
-	int i;
-
-	i = 0;
-	while (i < 4)
-	{
-		tetrimino[i] = tetrimino[i] << 1;
-		i++;
-	}
-}
-
-void	ft_swap(unsigned char *a, unsigned char *b)
-{
-	char temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-void	ft_sort(unsigned char *tetrimino)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (j == 0)
-	{
-		j = 1;
-		i = 0;
-		while (i < 3)
-		{
-			if (tetrimino[i] == 0 & tetrimino[i + 1] != 0)
-			{
-				ft_swap(&tetrimino[i], &tetrimino[i+1]);
-				i++;
-				j = 0;
-			}
-			else
-				i++;
-		}
-	}
-	while (j == 1)
-	{
-		if (((tetrimino[0] & 128) == 0) && ((tetrimino[1] & 128) == 0 )
-				&& ((tetrimino[2] & 128) == 0))
-			ft_shift(tetrimino);
-		else
-			j = 0;
-	}
-	
-}
+}	

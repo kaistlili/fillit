@@ -1,5 +1,5 @@
 NAME = fillit
-SRC = fillit.c ft_util.c ft_solver.c
+SRC = fillit.c ft_util.c ft_solver.c ft_read.c
 LIB = ./libft/libft.a
 FLAG = -Wall -Wextra -Werror 
 
