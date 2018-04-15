@@ -6,12 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:59:40 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/15 07:58:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/15 08:30:55 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
 
 void	ft_sortnextline(unsigned short *tetri)
 {
@@ -32,8 +31,7 @@ void	ft_removetetri(unsigned short *tetri, unsigned short *bitmap)
 	}
 }
 
-
-int ft_length(unsigned short *bitmap)
+int		ft_length(unsigned short *bitmap)
 {
 	int len;
 
@@ -43,15 +41,14 @@ int ft_length(unsigned short *bitmap)
 	return (len + 1);
 }
 
-
-int ft_width(unsigned short data)
+int		ft_width(unsigned short data)
 {
 	int i;
 	int count;
 
 	i = 0;
 	count = 0;
-	while (i < 16) 
+	while (i < 16)
 	{
 		if ((data >> i) & 1)
 			i = 100;
@@ -61,11 +58,10 @@ int ft_width(unsigned short data)
 			i++;
 		}
 	}
-
 	return (16 - count);
 }
 
-int ft_square(unsigned short *bitmap)
+int		ft_square(unsigned short *bitmap)
 {
 	int length;
 	int width;
@@ -83,10 +79,9 @@ int ft_square(unsigned short *bitmap)
 	if (width >= length)
 		return (width);
 	return (length);
-	
 }
 
-int ft_validbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
+int		ft_validbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
 {
 	int i;
 
@@ -98,7 +93,7 @@ int ft_validbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
 	return (1);
 }
 
-void ft_overlap(unsigned short *from, unsigned short *to)
+void	ft_overlap(unsigned short *from, unsigned short *to)
 {
 	int i;
 
@@ -110,15 +105,13 @@ void ft_overlap(unsigned short *from, unsigned short *to)
 	}
 }
 
-
-int	ft_checkborder(unsigned short *tetri)
+int		ft_checkborder(unsigned short *tetri)
 {
 	int i;
 	int counter;
 
 	i = 0;
 	counter = 1;
-
 	if (tetri[11] != 0)
 		return (0);
 	while ((i < 12) & (counter))
@@ -155,19 +148,20 @@ void	ft_getline(unsigned short tetri[28][17], int line, char *buffer)
 	{
 		ft_bitstoorder(tetri[i][line], tetri[i][0], buffer);
 		i++;
-	}	
+	}
 }
 
-void	ft_save_solution(unsigned short tetri[28][17], int *square,char solution[17][17])
+void	ft_save_solution(unsigned short tetri[28][17],
+						int *square, char solution[17][17])
 {
 	int line;
 
 	*square = ft_square(&tetri[26][1]);
-	line = 1; /*tetri bitmap starts at index 1*/
+	line = 1;
 	while (line < (*square + 1))
 	{
 		ft_memset(solution[line - 1], 46, 17);
-		ft_getline(tetri, line, solution[line - 1]);	
+		ft_getline(tetri, line, solution[line - 1]);
 		solution[line - 1][*square] = '\0';
 		line++;
 	}
@@ -184,7 +178,6 @@ void	ft_shiftleft(unsigned short *bitmap)
 		i++;
 	}
 }
-
 
 void	ft_shiftright(unsigned short *bitmap)
 {
@@ -224,7 +217,7 @@ void	ft_shiftdown(unsigned short *bitmap)
 	bitmap[i] = 0;
 }
 
-int	ft_mask(unsigned short *bitmap)
+int		ft_mask(unsigned short *bitmap)
 {
 	int i;
 
@@ -236,7 +229,7 @@ int	ft_mask(unsigned short *bitmap)
 	return (1);
 }
 
-void ft_sortbitmap(unsigned short *bitmap)
+void	ft_sortbitmap(unsigned short *bitmap)
 {
 	int i;
 
@@ -245,4 +238,4 @@ void ft_sortbitmap(unsigned short *bitmap)
 		ft_shiftup(bitmap);
 	while (ft_mask(bitmap))
 		ft_shiftleft(bitmap);
-}	
+}
