@@ -172,7 +172,7 @@ void	ft_shiftleft(unsigned short *bitmap)
 	int i;
 
 	i = 0;
-	while (i < 12)
+	while (i < 16)
 	{
 		bitmap[i] = bitmap[i] << 1;
 		i++;
@@ -184,11 +184,24 @@ void	ft_shiftright(unsigned short *bitmap)
 	int i;
 
 	i = 0;
-	while (i < 12)
+	while (i < 16)
 	{
 		bitmap[i] = bitmap[i] >> 1;
 		i++;
 	}
+}
+
+void	ft_shiftdown(unsigned short *bitmap)
+{
+	int i;
+
+	i = 15;
+	while (i > 0)
+	{
+		bitmap[i] = bitmap[i - 1];
+		i--;
+	}
+	bitmap[0] = 0;
 }
 
 void	ft_shiftup(unsigned short *bitmap)
@@ -196,7 +209,7 @@ void	ft_shiftup(unsigned short *bitmap)
 	int i;
 
 	i = 0;
-	while (i < 11)
+	while (i < 15)
 	{
 		bitmap[i] = bitmap[i + 1];
 		i++;
@@ -204,19 +217,7 @@ void	ft_shiftup(unsigned short *bitmap)
 	bitmap[i] = 0;
 }
 
-void	ft_shiftdown(unsigned short *bitmap)
-{
-	int i;
-
-	i = 11;
-	while (i > 0)
-	{
-		bitmap[i] = bitmap[i - 1];
-		i--;
-	}
-	bitmap[i] = 0;
-}
-
+/* takes u for shift up, d for shift down, r for shift right. l for shift left*/
 int		ft_mask(unsigned short *bitmap)
 {
 	int i;
