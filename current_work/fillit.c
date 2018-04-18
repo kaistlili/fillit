@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:53:48 by ktlili            #+#    #+#             */
-/*   Updated: 2018/04/15 08:05:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2018/04/18 20:10:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ int	main(int ac, char **av)
 	solve(tetri, &square, 0, solution);
 	printf("Square is: %d\n", square);
 	ft_printsolution(solution, square);
+
 }
