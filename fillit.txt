@@ -1,0 +1,56 @@
+void	ft_sortnextline(unsigned short *tetri)
+void	ft_removetetri(unsigned short *tetri, unsigned short *bitmap)
+int		ft_length(unsigned short *bitmap)
+int		ft_width(unsigned short data)
+int		ft_square(unsigned short *bitmap)
+int		ft_validbitmap(unsigned short *bitmap1, unsigned short *bitmap2)
+void	ft_overlap(unsigned short *from, unsigned short *to)
+int		ft_checkborder(unsigned short *tetri)
+void	ft_bitstoorder(unsigned short x, char order, char *buffer)
+void	ft_getline(unsigned short tetri[28][17], int line, char *buffer)
+void	ft_save_solution(unsigned short tetri[28][17],
+ int *square, char solution[17][17])
+void	ft_shiftleft(unsigned short *bitmap)
+void	ft_shiftright(unsigned short *bitmap)
+void	ft_shiftdown(unsigned short *bitmap)
+void	ft_shiftup(unsigned short *bitmap)
+int		ft_mask(unsigned short *bitmap)
+void	ft_sortbitmap(unsigned short *bitmap)
+/* refactore parser to deal with -1 open return*/
+5 files + fillit:c
+27 functions
+
+fillit.c:
+	main
+	ft_parser
+	ft_readnext
+	ft_square
+file1: read.c
+	ft_tobitflag	
+	valid_tetri
+	ft_set_n_bit
+	ft_connections
+	int ft_abs
+file2: solver.c
+	solve
+	ft_placable
+	ft_validbitmap
+	ft_overlap
+	ft_sortnextline
+file3: output.c
+	ft_bitstoorder
+	ft_getline
+	ft_printsolution
+	ft_save_solution
+file4: util.c
+	ft_shiftleft
+	ft_shiftright
+	ft_shiftdown
+	ft_shiftup
+	ft_sortbitmap	
+file5: util2.c
+	ft_length
+	ft_width
+	ft_removetetri
+	ft_checkborder
+	ft_mask
